@@ -177,12 +177,21 @@ int tessellatePolygon(const Polygons &polygons,
   Polygon tri;
   for (int t=0;t<numelems;t++) {
     tri.resize(3);
+    bool err = false;
     for (int i=0;i<3;i++) {
-      tri[i] = outputvertices[vindices[elements[t*3 + i]]];
-      //      printf("%d (%d) ", elements[t*3 + i], vindices[elements[t*3 + i]]);
+      int eidx = elements[t*3 + i];
+      int vidx = vindices[eidx];
+      printf("%d (%d) ", eidx, vidx);
+      if (vidx != TESS_UNDEF) {
+        tri[i] = outputvertices[vidx];
+      }
+      else {
+        err = true;
+      }
     }
-    //   printf("\n");
-    triangles.push_back(tri);
+    if (!err) triangles.push_back(tri);
+    else printf("Error: Triangle contains UNDEF vertex due to intersection");
+    printf("\n");
   }
 
   tessDeleteTess(tess);
