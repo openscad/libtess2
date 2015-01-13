@@ -22,6 +22,18 @@ solution "libtess2"
 		files { "Source/*.c" }
 		targetdir("Build")
 
+	-- cmd-line test program
+	project "test"
+		kind "ConsoleApp"
+		language "C++"
+		links { "tess2" }
+		files { "Test/test.cpp" }
+		includedirs { "Include", "Contrib" }
+		targetdir("Build")
+
+		configuration { "macosx" }
+			includedirs { "/opt/local/include" }
+	 
 	-- more dynamic example
 	project "example"
 		kind "ConsoleApp"
