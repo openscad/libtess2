@@ -53,5 +53,5 @@ solution "libtess2"
 			 defines { "NANOVG_GLEW" }
 
 		configuration { "macosx" }
-			links { "glfw3" }
-			linkoptions { "-framework OpenGL", "-framework Cocoa", "-framework IOKit", "-framework CoreVideo" }
+			includedirs { "/opt/local/include" }
+			linkoptions { "`pkg-config --libs glfw3`", "-framework OpenGL", "-framework Cocoa", "-framework IOKit", "-framework CoreVideo" }
